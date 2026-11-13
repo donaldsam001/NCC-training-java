@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
 
-            try {
+        try {
             Experience experience = new Experience(
                     "E01",
                     "Nguyen Van A",
@@ -59,31 +59,21 @@ public class Main {
             System.out.println("Create employee failed: " + e.getMessage());
         }
 
-        // 2. DISPLAY EMPLOYEES
 
         System.out.println("\n===== ALL EMPLOYEES =====");
         employeeManager.getListOfEmployee();
 
-        // 3. UPDATE INTERN
 
-        try {
-            employeeManager.updateInternInfor(
-                    "E03",
-                    "Le Van D",
-                    LocalDate.of(2003, 5, 15),
-                    "0912345678",
-                    "invalid-email",
-                    "HUST",
-                    "Software Engineering",
-                    7
-            );
-
-            System.out.println("Update successfully!");
-
-        } catch (EmployeeException e) {
-            System.out.println(e.getMessage());
-        }
-
+        employeeManager.updateInternInfor(
+                "E03",
+                "Le Van D",
+                LocalDate.of(2003, 5, 15),
+                "0912345678abc",
+                "invalid-email",
+                "HUST",
+                "Software Engineering",
+                5
+        );
 
         System.out.println("\n===== AFTER UPDATE =====");
         employeeManager.getListOfEmployee();

@@ -181,9 +181,13 @@ public class EmployeeManager {
             experience.setProSkill(proSkill);
 
             System.out.println("Updated");
-        } catch (EmailException | BirthDayException | PhoneException | FullNameException e) {
+        }
+        catch (EmployeeException e){
             System.out.println("Fail: "+e.getMessage());
         }
+//        catch (EmailException | BirthDayException | PhoneException | FullNameException e) {
+//            System.out.println("Fail: "+e.getMessage());
+//        }
 
     }
 

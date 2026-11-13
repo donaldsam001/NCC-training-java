@@ -21,10 +21,10 @@ public abstract class Employee {
 
     public Employee(String id, String fullName, LocalDate birthDay, String phone, String email, int type)  throws EmployeeException  {
         this.id = id;
-        this.fullName = fullName;
-        this.birthDay = birthDay;
-        this.email = email;
-        this.phone = phone;
+        setFullName(fullName);
+        setBirthDay(birthDay);
+        setPhone(phone);
+        setEmail(email);
         this.type = type;
         this.certs = new ArrayList<>();
         count ++;
@@ -49,7 +49,7 @@ public abstract class Employee {
         if (fullName == null ||
                 !fullName.matches("[\\p{L}]+(?:[ '\\-][\\p{L}]+)*")) {
 
-            throw new FullNameException("Invalid full name!");
+            throw new FullNameException("Invalid full name");
         }this.fullName = fullName;
     }
 
@@ -62,7 +62,7 @@ public abstract class Employee {
         if (birthDay == null ||
                 birthDay.isAfter(LocalDate.now())) {
 
-            throw new BirthDayException("Invalid birthday!");
+            throw new BirthDayException("Invalid birthday");
         }this.birthDay = birthDay;
     }
 
@@ -74,7 +74,7 @@ public abstract class Employee {
 
         if (phone == null || !phone.matches("^\\+?[0-9]{10,13}$")) {
 
-            throw new PhoneException("Invalid phone number!");
+            throw new PhoneException("Invalid phone number");
         }
         this.phone = phone;
     }
@@ -88,7 +88,7 @@ public abstract class Employee {
         if (email == null ||
                 !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")) {
 
-            throw new EmailException("Invalid email!");
+            throw new EmailException("Invalid email");
         }this.email = email;
     }
 
@@ -117,6 +117,4 @@ public abstract class Employee {
             certificate.showInfo();
         }
     }
-
-
 }
