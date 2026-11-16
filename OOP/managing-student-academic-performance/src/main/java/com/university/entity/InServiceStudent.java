@@ -4,20 +4,20 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class InServiceStudent extends Student{
-
+public class InServiceStudent extends Student {
     private String trainingPartnershipLocation;
-
-    public InServiceStudent(int studentCode, String fullName, LocalDate dob, int studentYear,
-                            double inputScore, List<AcademicResult> academicResults,
-                            String trainingPartnershipLocation) {
-        super(studentCode, fullName, dob, studentYear, inputScore, academicResults);
-        setTrainingPartnershipLocation(trainingPartnershipLocation);
-    }
 
     public InServiceStudent() {
         super();
-        this.trainingPartnershipLocation = "Unknow";
+        this.trainingPartnershipLocation = "Unknown";
+    }
+
+    public InServiceStudent(int studentCode, String fullName, LocalDate dob,
+                            int studentYear, double inputScore,
+                            List<AcademicResult> academicResults,
+                            String trainingPartnershipLocation) {
+        super(studentCode, fullName, dob, studentYear, inputScore, academicResults);
+        setTrainingPartnershipLocation(trainingPartnershipLocation);
     }
 
     public InServiceStudent(InServiceStudent other) {
@@ -26,33 +26,13 @@ public class InServiceStudent extends Student{
     }
 
     @Override
-    public void input(Scanner scanner){
-        System.out.println("In service student");
-        super.input(scanner);
-
-        System.out.print("Training Partnership Location");
-        String location = scanner.nextLine();
-
-        setTrainingPartnershipLocation(location);
-    }
-
-    @Override
-    public void output(){
-        System.out.println("In service student");
-        super.output();
-
-        System.out.println("Training Partnership Location: "+ trainingPartnershipLocation);
-    }
-
-
-    @Override
-    public boolean isRegular(){
+    public boolean isRegular() {
         return false;
     }
 
     @Override
     public String getStudentType() {
-        return "In service";
+        return "In-service";
     }
 
     @Override
@@ -60,14 +40,39 @@ public class InServiceStudent extends Student{
         return new InServiceStudent(this);
     }
 
+    @Override
+    public void input(Scanner scanner) {
+        System.out.println("=== IN-SERVICE STUDENT ===");
+        super.input(scanner);
+
+        while (true) {
+            System.out.print("Training partnership location: ");
+            String location = scanner.nextLine().trim();
+            try {
+                setTrainingPartnershipLocation(location);
+                break;
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Invalid input: " + ex.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void output() {
+        super.output();
+        System.out.println("Training partnership location: "
+                + trainingPartnershipLocation);
+    }
+
     public String getTrainingPartnershipLocation() {
         return trainingPartnershipLocation;
     }
 
-    public void setTrainingPartnershipLocation(String trainingPartnershipLocation) {
-        if (trainingPartnershipLocation == null || trainingPartnershipLocation.isBlank()){
-            throw new IllegalArgumentException("Training location cannot be empty.");
+    public void setTrainingPartnershipLocation(String location) {
+        if (location == null || location.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Training partnership location cannot be empty.");
         }
-        this.trainingPartnershipLocation = trainingPartnershipLocation;
+        this.trainingPartnershipLocation = location.trim();
     }
 }
