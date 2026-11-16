@@ -1,32 +1,50 @@
 package com.university.entity;
 
 public class AcademicResult {
-
     private int semester;
-    private double GPA;
+    private double gpa;
 
-    // default
     public AcademicResult() {
-        this.semester = -1;
-        this.GPA = 0.0;
+        this(1, 0.0);
     }
 
-    // parameter
-    public AcademicResult(int semester, double GPA) {
-        this.semester = semester;
-        this.GPA = GPA;
+    public AcademicResult(int semester, double gpa) {
+        setSemester(semester);
+        setGpa(gpa);
     }
 
-    // copy
     public AcademicResult(AcademicResult other) {
-        this.semester = other.semester;
-        this.GPA = other.GPA;
+        this(other.semester, other.gpa);
     }
 
-    public void display(){
-        System.out.println("Semester: " + semester);
-        System.out.println("GPA: " + GPA);
+    public int getSemester() {
+        return semester;
     }
 
-//
+    public void setSemester(int semester) {
+        if (semester <= 0) {
+            throw new IllegalArgumentException("Semester must be a positive integer.");
+        }
+        this.semester = semester;
+    }
+
+    public double getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(double gpa) {
+        if (!Double.isFinite(gpa) || gpa < 0.0 || gpa > 10.0) {
+            throw new IllegalArgumentException("GPA must be between 0 and 10.");
+        }
+        this.gpa = gpa;
+    }
+
+    public void display() {
+        System.out.printf("Semester %d - GPA: %.2f%n", semester, gpa);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Semester %d: %.2f", semester, gpa);
+    }
 }
